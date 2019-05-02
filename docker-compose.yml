@@ -1,0 +1,52 @@
+version: "3"
+services:
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - acmenet
+  mongo:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongodata:/data/db
+    command: --smallfiles
+    # environment:
+      # MONGO_INITDB_DATABASE: fixit
+      # MONGO_INITDB_ROOT_USERNAME: axway
+      # MONGO_INITDB_ROOT_PASSWORD: Axway2019
+    ports:
+      - "27017:27017"
+    networks:
+      - acmenet
+  fixit:
+    image: vbelfoure/fixit-vendor-app:1.0.0
+    depends_on:
+      - mongo
+    ports:
+      - "3000:3000"
+    networks:
+      - acmenet
+  repairit:
+    image: vbelfoure/repairit-vendor-app:1.0.0
+    depends_on:
+      - mongo
+    ports:
+      - "3001:3001"
+    networks:
+      - acmenet
+  patchit:
+    image: vbelfoure/patchit-vendor-app:1.0.0
+    depends_on:
+      - mongo
+    ports:
+      - "3002:3002"
+    networks:
+      - acmenet
+volumes:
+  mongodata:
+networks:
+  acmenet:
