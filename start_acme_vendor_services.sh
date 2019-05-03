@@ -17,4 +17,4 @@ done
 docker volume create mongodata
 
 # start application stack
-docker stack deploy -c .\docker-compose.yml acme
+docker-compose -c .\docker-compose.yml acme
