@@ -1,13 +1,5 @@
 version: "3"
 services:
-  visualizer:
-    image: dockersamples/visualizer:stable
-    ports:
-      - "8080:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    networks:
-      - acmenet
   mongo:
     image: mongo:latest
     restart: always
@@ -23,27 +15,27 @@ services:
     networks:
       - acmenet
   fixit:
-    image: vbelfoure/fixit-vendor-app:1.0.0
+    image: vbelfoure/fixit-vendor-app:latest
     depends_on:
       - mongo
     ports:
-      - "3000:3000"
+      - "8010:8010"
     networks:
       - acmenet
   repairit:
-    image: vbelfoure/repairit-vendor-app:1.0.0
+    image: vbelfoure/repairit-vendor-app:latest
     depends_on:
       - mongo
     ports:
-      - "3001:3001"
+      - "8011:8011"
     networks:
       - acmenet
   patchit:
-    image: vbelfoure/patchit-vendor-app:1.0.0
+    image: vbelfoure/patchit-vendor-app:latest
     depends_on:
       - mongo
     ports:
-      - "3002:3002"
+      - "8012:8012"
     networks:
       - acmenet
 volumes:
