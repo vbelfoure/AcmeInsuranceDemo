@@ -23,7 +23,7 @@ services:
     networks:
       - acmenet
   repairit:
-    image: vbelfoure/repairit-vendor-app:1.0.0
+    image: vbelfoure/repairit-vendor-app:1.0.1
     depends_on:
       - mongo
     ports:
@@ -31,7 +31,7 @@ services:
     networks:
       - acmenet
   patchit:
-    image: vbelfoure/patchit-vendor-app:1.0.0
+    image: vbelfoure/patchit-vendor-app:1.0.1
     depends_on:
       - mongo
     ports:
